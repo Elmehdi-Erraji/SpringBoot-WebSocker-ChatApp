@@ -1,0 +1,63 @@
+<div class="flex flex-col h-screen bg-gray-100">
+  <!-- Chat Header -->
+  <div class="bg-white p-4 shadow-md">
+    <h2 class="text-xl font-bold text-center">Spring WebSocket Chat Demo</h2>
+  </div>
+
+<!--  &lt;!&ndash; Connecting Message &ndash;&gt;-->
+<!--  <div *ngIf="messages.length > 0 &&-->
+<!--           (messages[messages.length - 1]?.type === 'JOIN' ||-->
+<!--            messages[messages.length - 1]?.type === 'LEAVE')"-->
+<!--       class="text-center text-gray-600 p-2">-->
+<!--    {{ messages[messages.length - 1].sender }}-->
+<!--    {{ messages[messages.length - 1]?.type === 'JOIN' ? 'joined' : 'left' }} the chat.-->
+<!--  </div>-->
+
+  <!-- Message Area -->
+  <ul class="flex-1 overflow-y-auto p-4 space-y-2">
+    <li
+      *ngFor="let message of messages"
+      [ngClass]="{
+    'text-center text-gray-600': message.type === 'JOIN' || message.type === 'LEAVE',
+    'bg-white p-4 rounded-lg shadow-sm': message.type === 'CHAT'
+  }"
+    >
+
+
+      <!-- For CHAT messages, we can continue to display them as before -->
+      <div *ngIf="message.type === 'CHAT'" class="flex items-center space-x-3">
+        <div
+          class="w-8 h-8 flex items-center justify-center rounded-full text-white"
+          [style.backgroundColor]="getAvatarColor(message.sender)"
+        >
+          {{ message.sender[0] }}
+        </div>
+        <span class="font-bold">{{ message.sender }}</span>
+      </div>
+      <p>{{ message?.content }}</p>
+    </li>
+
+  </ul>
+
+  <!-- Message Input Form -->
+  <form (ngSubmit)="sendMessage($event)" class="p-4 bg-white border-t">
+    <div class="flex space-x-2">
+      <!-- Message Input -->
+      <input
+        type="text"
+        [(ngModel)]="messageContent"
+        placeholder="Type a message..."
+        class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        name="message"
+        required
+      />
+      <!-- Send Button -->
+      <button
+        type="submit"
+        class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+      >
+        Send
+      </button>
+    </div>
+  </form>
+</div>

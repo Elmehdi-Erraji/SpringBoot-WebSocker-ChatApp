@@ -1,0 +1,26 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h1 class="text-2xl font-bold text-center mb-6">Type your username to enter the Chatroom</h1>
+    <form (ngSubmit)="connect($event)" class="space-y-4">
+      <div>
+        <input
+          type="text"
+          [(ngModel)]="username"
+          placeholder="Username"
+          autocomplete="off"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          name="username"
+          required
+        />
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+        >
+          Start Chatting
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
